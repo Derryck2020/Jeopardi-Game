@@ -1,0 +1,46 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+  box-sizing: border-box;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(238, 215, 87);
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+span {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#game-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 75vw;
+  margin: 10px auto;
+  border: 2px solid red;
+}
+
