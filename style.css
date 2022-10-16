@@ -22,7 +22,7 @@ body {
   box-sizing: border-box;
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: rgb(238, 215, 87);
+  background-color: rgb(197, 243, 208);
 }
 
 h1 {
@@ -44,3 +44,27 @@ span {
   border: 2px solid red;
 }
 
+#category-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 2px solid orange ;
+}
+
+#clue-board {
+  flex-direction: column;
+  border: 2px solid blue;
+}
+
+.clue-row {
+  display: flex;
+  border: 2px solid orange;
+}
+
+.clue-box {
+  display: flex;
+  border-radius: 5px;
+  margin: 5px;
+  height: 100px;
+  flex: 1;
+}
