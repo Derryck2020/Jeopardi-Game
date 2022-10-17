@@ -22,32 +22,46 @@ span {
   flex-direction: column;
   width: 75vw;
   margin: 10px auto;
-  border: 2px solid red;
+  /*border: 2px solid red; This helps us to see the actual section in the console it*/
 }
 
 #category-row {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  border: 2px solid orange ;
+  /*border: 2px solid orange ; This helps us to see the actual section in the console it*/
 }
 
 #clue-board {
   flex-direction: column;
-  border: 2px solid blue;
+  /*border: 2px solid blue; This helps us to see the actual section in the console it*/
 }
 
 .clue-row {
   display: flex;
-  border: 2px solid rgb(255, 0, 234); /*This helps to see the actual section in the console */
+  /*border: 2px solid rgb(255, 0, 234); This helps us to see the actual section in the console it*/
   margin: 5px;
 }
 
 .clue-box {
   display: flex;
+  background-color: rgb(114, 165, 37);
+  border: 2px solid rgb(255, 255, 255); /*This helps us to see the actual section in the console it*/
   border-radius: 5px;
   margin: 5px;
   height: 100px;
   flex: 1;
-  border: 2px solid green;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.category-box {
+  font-size: 0.8rem;
+  line-height: 25px;
+}
+
+.clicked-box { /* When a box is clicked we want the answer to fit in the box*/
+  font-size: 1rem;
 }
