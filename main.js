@@ -1,9 +1,11 @@
 //Initializing the Game on page Load
-
 initCategoryRow() //we call the function
 initBoard()  //we call the function 
 
+document.querySelector('button').addEventListener('click', buildCategories)
 
+
+//We create Category Row
 function initCategoryRow(){
     let categoryRow = document.getElementById('category-row')
 
@@ -15,6 +17,8 @@ function initCategoryRow(){
 
 }
 
+
+//We create clue board
 function initBoard(){
     let board = document.getElementById('clue-board')
 
@@ -38,12 +42,14 @@ function initBoard(){
 }
 
 
-function randInt (){
+function randInt (){ // This function which generate random integers will be used in the buildCategories function
     return Math.floor(Math.random() * (18418) + 1)
 }
 
 
-function buildCategories(){
+let categoryArray = [] //We declared an empty array so so we dump the result(res) in it and use it globally
+
+function buildCategories(){//Function used for fecting the API's
 
     const fetchReq1 = fetch(
         `https://jservice.io/api/category?id=${randInt()}`
@@ -73,17 +79,21 @@ function buildCategories(){
 
     allData.then((res) =>{
         console.log(res)
+        categoryArray = res //assign it to the res
+        setCategories(categoryArray)
     })
 
 }
 
 
-
-
-
-
-
-
+//We are going to generate the categories so they appear on top of the board
+function setCategories (categoryArray){
+    let element = document.getElementById('category-row') //Here we are targeting the section where we wants the stuff to appear
+        let children = element.children; //Inside the category-row, we have six boxes which are children of that row (parent-row)
+        for (let i = 0; i < children.length; i++){ //we treat the boxes in the row as array and loop through them
+            children[i].innerHTML = categoryArray[i].title; //For each child element, we set the innerHTML equal to the categoryArray item title
+        }
+}
 
 
 function getclue(){
