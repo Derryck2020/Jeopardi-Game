@@ -33,7 +33,7 @@ function initBoard(){
             let box = document.createElement('div')// This will create the box
             box.className = 'clue-box' //We gave our box a className of 'clue-box'
             box.textContent = '$' + boxValue //we will add the boxValue to the inside of the box
-            box.addEventListener('click',getclue,false) //we added an addEventListener to the box
+            box.addEventListener('click',getClue,false) //we added an addEventListener to the box
             row.appendChild(box) //This will nest the box inside the row(like putting each box in the row it will be sitting )
         }
 
@@ -96,6 +96,51 @@ function setCategories (categoryArray){
 }
 
 
-function getclue(){
-    console.log('Just getting started')
+
+//Figure what function was clicked
+// Here when box is clicked it pulls out a clue for the user //event target is used to pinpoint what was actually clicked 
+function getClue(event){
+    let child = event.currentTarget //https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+    child.classList.add('clicked-box') //https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+    let boxValue = child.innerHTML.slice(1) //we want to extract the value of the dollar boxes that was clicked
+    let parent = child.parentNode //https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode
+    let index = Array.prototype.findIndex.call(parent.children, (c) => c === child)
+    let cluesList = categoryArray[index].clues
+    let clue = cluesList.find(obj =>{
+        return obj.value == boxValue
+    })
+    showQuestion(clue, child, boxValue)
+}
+
+
+//Show Question to user and get their Answer
+function showQuestion(clue, target, boxValue){
+    let userAnswer = prompt(clue.question).toLowerCase()
+    let correctAnswer = clue.answer.toLowerCase().replace(/<\/?[^>]+(>|$)/g, "")
+    let possiblePoints = +(boxValue)
+    target.innerHTML = clue.answer
+    target.removeEventListener('click', getClue, false)
+    evaluateAnswer(userAnswer, correctAnswer, possiblePoints)
+}
+
+
+//Evaluate answer and show to user to confirm
+function evaluateAnswer(userAnswer, correctAnswer, possiblePoints){
+    let checkAnswer = (userAnswer == correctAnswer) ? 'correct' : 'incorrect'
+    let confirmAnswer = 
+    confirm(`For $${possiblePoints}, you answered "${userAnswer}", and the correct answer was "${correctAnswer}". Your answer appears to be ${checkAnswer}. Click OK to accept or click Cancel if the answer was not properly evaluated.`)
+    awardPoints(checkAnswer, confirmAnswer, possiblePoints)
+}
+
+
+//Award Points
+function awardPoints(checkAnswer, confirmAnswer, possiblePoints){
+    if (!(checkAnswer == 'incorrect' && confirmAnswer == true)){
+        let target = document.getElementById('score')
+        let currentScore = +(target.innerText)
+        currentScore += possiblePoints
+        target.innerText = currentScore
+    } else {
+        alert(`No points awarded.`)
+    }
 }
