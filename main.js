@@ -41,15 +41,18 @@ function initBoard(){
     }
 }
 
-
+//Calling of API's
 function randInt (){ // This function which generate random integers will be used in the buildCategories function
     return Math.floor(Math.random() * (18418) + 1)
 }
 
-
 let categoryArray = [] //We declared an empty array so so we dump the result(res) in it and use it globally
 
 function buildCategories(){//Function used for fecting the API's
+
+    if(!(document.getElementById('category-row').firstChild.innerText == '')){//Check the category-row element (the first box) and see if the innerText is empty, if it is not empty, reset board.
+        resetBoard()
+    }
 
     const fetchReq1 = fetch(
         `https://jservice.io/api/category?id=${randInt()}`
@@ -144,3 +147,22 @@ function awardPoints(checkAnswer, confirmAnswer, possiblePoints){
         alert(`No points awarded.`)
     }
 }
+
+
+//Reset Board
+function resetBoard(){
+    let clueParent = document.getElementById('clue-board')
+    while(clueParent.firstChild) {
+        clueParent.removeChild(clueParent.firstChild) //look for nested elements inside the parent and get rid of them
+    }
+    //We are doing the same thing for the category-row
+    let catParent = document.getElementById('category-row')
+    while(catParent.firstChild) {
+        catParent.removeChild(catParent.firstChild)
+    }
+    document.getElementById('score').innerText = 0 //We reset the board to the initial state
+    initBoard() //We call our initBoard function
+    initCategoryRow() //We call our initCategoryRow function
+}
+
+
