@@ -56,6 +56,7 @@ span {
   align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
+  outline: 2px solid rebeccapurple;
 }
 
 .category-box {
